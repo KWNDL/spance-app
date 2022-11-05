@@ -6,13 +6,15 @@ email = \"kevin.wandel@hotmail.com\"\n\
 " > ~/.streamlit/credentials.toml
 
 echo "[theme]
-primaryColor='#FC776A'
-backgroundColor='#252525'
-secondaryBackgroundColor='#444444'
-textColor='#FFFFFF'
+base = 'light'
+primaryColor='#FF4F00'
+backgroundColor='#FFFFFF'
+secondaryBackgroundColor='#DCDCDC'
+textColor='#000000'
 font='sans serif'
 [server]
 headless = true
 port = $PORT
 enableCORS = false
 " > ~/.streamlit/config.toml
+

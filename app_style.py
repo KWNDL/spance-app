@@ -37,11 +37,13 @@ def page_settings(title):
 
 # Page footer
 def header(page_header):
+    # Push Page Up
+    st.markdown('###')
     # Insert Logo
-    st.markdown('#')
     a, b, c, = st.columns(3)
     with b:
         st.image('images/sp_logo.png')
+    # Line
     st.markdown('---')
     st.title(page_header)
 

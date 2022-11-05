@@ -1,17 +1,16 @@
 # External Libraries
 import streamlit as st
 # Internal libraries
-import app_style
+from app_style import *
 
 
 # Page Settings
-app_style.page_settings('Outlier Detection - Spance')
-
-# Page Header
-app_style.header('Outlier Detection')
-
-# Page Settings
-app_style.footer()
-
+page_settings('Outlier Detection - Spance')
 # Sidebar Logo
-app_style.sidebar_logo('images/sp_logo.png')
+sidebar_logo('images/sp_logo.png')
+# Page Header
+header('Outlier Detection')
+# Page Under Construction
+st.info('Page under construction. Please come back later!')
+# Page Settings
+footer()

@@ -11,5 +11,7 @@ page_settings('Forecasting - Spance')
 sidebar_logo('images/sp_logo.png')
 # Page Header
 header('Forecasting')
+# Page Under Construction
+st.info('Page under construction. Please come back later!')
 # Footer
 footer()

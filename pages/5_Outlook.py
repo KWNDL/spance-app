@@ -1,13 +1,13 @@
 # External Libraries
 import streamlit as st
 # Internal libraries
-import app_style
+from app_style import *
 
 # Page config
-app_style.page_settings('Outlook - Spance')
+page_settings('Outlook - Spance')
 
 # Sidebar Logo
-app_style.sidebar_logo('images/sp_logo.png')
+sidebar_logo('images/sp_logo.png')
 
 ### FOOTPRINTS PREVIEW TEXT
 def fp_preview_welcome():
@@ -36,9 +36,9 @@ def fp_preview_scrnshot1():
                   so that you don’t need to seek advice from a technical person.'
 
         ### FINAL TEXT
-        text_final = app_style.html_text(text1a) + app_style.html_highlight_text(text1b) + app_style.html_text(text1c) + \
-                     app_style.html_highlight_text(text1d) + ', '+ app_style.html_highlight_text(text1e) + app_style.html_text(text1f) + \
-                     app_style.html_highlight_text(text1g) + '. ' + app_style.html_text(text1h)
+        text_final = html_text(text1a) + html_highlight_text(text1b) + html_text(text1c) + \
+                     html_highlight_text(text1d) + ', '+ html_highlight_text(text1e) + html_text(text1f) + \
+                     html_highlight_text(text1g) + '. ' + html_text(text1h)
         return st.markdown(text_final, unsafe_allow_html=True)
 
     ### FUNCTION
@@ -72,9 +72,9 @@ def fp_preview_scrnshot2():
         text1g = 'with Footprints.'
 
         ### FINAL TEXT
-        text_final = app_style.html_text(text1a) + app_style.html_highlight_text(text1b) + app_style.html_text(text1c) + \
-                     app_style.html_highlight_text(text1d) + app_style.html_text(text1e) + app_style.html_highlight_text(text1f) + \
-                     app_style.html_text(text1g)
+        text_final = html_text(text1a) + html_highlight_text(text1b) + html_text(text1c) + \
+                     html_highlight_text(text1d) + html_text(text1e) + html_highlight_text(text1f) + \
+                     html_text(text1g)
         return st.markdown(text_final, unsafe_allow_html=True)
 
     ### FUNCTION
@@ -108,9 +108,9 @@ def fp_preview_scrnshot3():
         text1i = 'see it with a click'
 
         ### FINAL TEXT
-        text_final = app_style.html_text(text1a) + app_style.html_highlight_text(text1b) + '. '+ app_style.html_text(text1c) + \
-                     app_style.html_highlight_text(text1d) + ', ' + app_style.html_highlight_text(text1e) + app_style.html_text(text1f) + \
-                     app_style.html_highlight_text(text1g) + '. ' + app_style.html_text(text1h) + app_style.html_highlight_text(text1i) + '.'
+        text_final = html_text(text1a) + html_highlight_text(text1b) + '. '+ html_text(text1c) + \
+                     html_highlight_text(text1d) + ', ' + html_highlight_text(text1e) + html_text(text1f) + \
+                     html_highlight_text(text1g) + '. ' + html_text(text1h) + html_highlight_text(text1i) + '.'
         return st.markdown(text_final, unsafe_allow_html=True)
 
     ### FUNCTION
@@ -136,7 +136,7 @@ def fp_preview_outlook():
 
 # Displaying the page
 ### PREVIEW HEADER
-app_style.header('Outlook')
+header('Outlook')
 ### PREVIEW WELCOME
 fp_preview_welcome()
 ### SPACING
@@ -156,4 +156,4 @@ st.markdown('---')
 ### PREVIEW FINAL OUTLOOK
 fp_preview_outlook()
 # DISPLAY: FOOTER
-app_style.footer()
+footer()

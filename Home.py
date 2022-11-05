@@ -1,6 +1,6 @@
 '''
 running the app
-streamlit run /Users/kevin/PycharmProjects/spance-webapp/Home.py
+streamlit run /Users/kevin/PycharmProjects/spance-app/Home.py
 '''
 
 # IMPORT: External Libraries

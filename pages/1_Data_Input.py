@@ -460,8 +460,10 @@ def input_ml_construct(norm_set):
     ### CLEANUP
     fp = fp.round(2)
     fp = fp.drop('index', axis=1)
+
     fp[sel_datetime] = fp[sel_datetime].dt.strftime('%Y-%m-%d')
     cost_onetime[sel_datetime] = cost_onetime[sel_datetime].dt.strftime('%Y-%m-%d')
+    cost_data[sel_datetime] = cost_data[sel_datetime].dt.strftime('%Y-%m-%d')
 
     ### CALCULATE KPIs
     prediction_amount = fp.sum()[sel_costcol]
@@ -510,6 +512,7 @@ input_welcome()
 # DISPLAY: FILE UPLOAD
 st.markdown('---')
 cost_data, file_uploaded = input_upload()
+
 # DISPLAY: SELECT HIERARCHY
 if file_uploaded == True:
     st.markdown('---')

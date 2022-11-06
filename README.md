@@ -8,7 +8,6 @@ The repo consists of two parts - directories and the code itself. Starting with 
 - **data**: App sample data
 - **images**: Logo and Favicon
 - **pages**: Sub pages including code of the app
-- **venv**: Python environment. To be removed.
 
 The remaning files are the code and other supporting files.
 - **app_style.py**: Functions for app page layout

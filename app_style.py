@@ -55,6 +55,19 @@ def footer():
         st.image('images/sp_logo.png')
     st.caption(str(datetime.date.today().year) + ' | find us on spance.io')
 
+def call_session_state():
+    # Get Session States
+    prediction = st.session_state['sp_input_df_prediction']
+    raw_data = st.session_state['sp_input_df_rawdata']
+    onetime = st.session_state['sp_input_df_onetimecost']
+    predcol_cost = st.session_state['sp_input_predcol_cost']
+    predcol_hierarchy = st.session_state['sp_input_predcol_hierarchy']
+    predcol_datetime = st.session_state['sp_input_predcol_datetime']
+    selection_currency = st.session_state['sp_input_selection_currency']
+    color_base = st.session_state['sp_color_base']
+
+    return prediction, raw_data, onetime, predcol_cost, predcol_hierarchy, predcol_datetime, selection_currency, color_base
+
 ### FOOTPRINTS PREDICTION CHECK
 def app_predcheck():
     check = st.session_state['sp_input_status_prediction']

@@ -27,9 +27,9 @@ def fp_outliers_kpis():
     st.write('To get started, here is an overview of some of the most critical KPIs for the Outlier Analysis.')
 
     ### KPI GENERATION
-    outlier_high = len(prediction[prediction['spance_pred_rating'] == 'Too High'])
-    outlier_low = len(prediction[prediction['spance_pred_rating'] == 'Too Low'])
-    deviation_sum = prediction['spance_pred_dev_abs'].sum()
+    outlier_high = len(outlier[outlier['spance_pred_rating'] == 'Too High'])
+    outlier_low = len(outlier[outlier['spance_pred_rating'] == 'Too Low'])
+    deviation_sum = outlier['spance_pred_dev_abs'].sum()
 
     # KPI Boxes in 4 columns
     kpileft, kpimidleft, kpimidright, kpiright = st.columns(4)
@@ -59,13 +59,10 @@ def fp_outliers_periods():
     st.header('Outliers by Period')
     st.write('View when how many outliers appeared in each analyzed period by the outlier count and expected deviation amount.')
 
-    # Create Table for Outliers
-    outlier_table = prediction[prediction['spance_pred_rating'] != 'Okay']
-
     # Count per Outlier Rating per Period
-    outlier_cnt = outlier_table.groupby(
+    outlier_cnt = outlier.groupby(
         by=[predcol_datetime,'spance_pred_rating'], axis=0, as_index=False).size()
-    outlier_amt = outlier_table.groupby(
+    outlier_amt = outlier.groupby(
         by=[predcol_datetime,'spance_pred_rating'], axis=0, as_index=False).sum('spance_pred_dev_abs')[[predcol_datetime,'spance_pred_rating','spance_pred_dev_abs']]
 
     ### TAB WITH CHARTS
@@ -76,7 +73,7 @@ def fp_outliers_periods():
                     x=alt.X('spance_pred_rating:O', title=None),
                     y=alt.Y('spance_pred_dev_abs:Q', title=None),
                     column=alt.Column(predcol_datetime, title=None),
-                    color=alt.Color('spance_pred_rating',scale=alt.Scale(range=['#FF4F00', '#DCDCDC'])),
+                    color=alt.Color('spance_pred_rating',scale=alt.Scale(range=['#FF4F00', '#DCDCDC']),legend=None),
                     tooltip=[predcol_datetime,'spance_pred_dev_abs']) \
                 .configure_view(strokeWidth=0.0) \
                 .interactive()
@@ -88,7 +85,7 @@ def fp_outliers_periods():
                     x=alt.X('spance_pred_rating:O', title=None),
                     y=alt.Y('size:Q', title=None),
                     column=alt.Column(predcol_datetime, title=None),
-                    color=alt.Color('spance_pred_rating', scale=alt.Scale(range=['#FF4F00','#DCDCDC'])),
+                    color=alt.Color('spance_pred_rating', scale=alt.Scale(range=['#FF4F00','#DCDCDC']),legend=None),
                     tooltip=[predcol_datetime,'size']) \
             .configure_view(strokeWidth=0.0) \
             .interactive()
@@ -115,11 +112,11 @@ def fp_outliers_hierarchy():
         st.info('Please select a hierarchy column.')
     else:
         ### CALCULATE DEVIATION AMOUNT
-        outl_amt = prediction.groupby(view_select_dimension,as_index=False).sum()[view_select_dimension + [predcol_cost]]
+        outl_amt = outlier.groupby(view_select_dimension,as_index=False).sum()[view_select_dimension + [predcol_cost]]
         outl_amt = outl_amt.rename(columns={predcol_cost : 'Amount'}).reset_index(drop=True)
 
         ### CALCULATE OUTLIER COUNT
-        outl_cnt = prediction.groupby(view_select_dimension, as_index=False).size()[view_select_dimension + ['size']]
+        outl_cnt = outlier.groupby(view_select_dimension, as_index=False).size()[view_select_dimension + ['size']]
         outl_cnt = outl_cnt.rename(columns={'size': 'Occurence'}).reset_index(drop=True)
 
         ### FINALIZE TABLE
@@ -159,9 +156,9 @@ def fp_outliers_top_outliers():
 
     ### FILTER DEVIATION TYPES
     if sel_devtype != 'All':
-        outlier_table = prediction[prediction['spance_pred_rating'] == sel_devtype]
+        outlier_table = outlier[outlier['spance_pred_rating'] == sel_devtype]
     else:
-        outlier_table = prediction[prediction['spance_pred_rating'] != 'Okay']
+        outlier_table = outlier
 
     ### FILTER TABLE AND SORT BY ABSOLUTE DEVIATION
     outlier_table = outlier_table[outlier_table[predcol_datetime] == sel_period]
@@ -311,12 +308,14 @@ def fp_outliers_footprints():
 
 # DISPLAY: RUN THE PAGE
 # Call session states
-prediction, raw_data, onetime, predcol_cost, \
-predcol_hierarchy, predcol_datetime, selection_currency, \
-color_base = call_session_state()
+
 
 # Run App
 try:
+    # Call session states into the script
+    prediction, raw_data, onetime, outlier, predcol_cost, \
+    predcol_hierarchy, predcol_datetime, selection_currency, \
+    color_base = call_session_state()
     ### FP WELCOME
     fp_outliers_welcome()
     ### FP PREDICTION CHECK

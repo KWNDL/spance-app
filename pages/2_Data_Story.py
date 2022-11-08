@@ -513,13 +513,11 @@ def fp_datastory_change():
 
 
 # DISPLAY: RUN THE PAGE
-# Call session states
-prediction, raw_data, onetime, predcol_cost, \
-predcol_hierarchy, predcol_datetime, selection_currency, \
-color_base = call_session_state()
-
-# Run page functions
 try:
+    # Call session states into the script
+    prediction, raw_data, onetime, outlier, predcol_cost, \
+    predcol_hierarchy, predcol_datetime, selection_currency, \
+    color_base = call_session_state()
     ### FP WELCOME
     datastory_welcome()
     ### FP PREDICTION CHECK

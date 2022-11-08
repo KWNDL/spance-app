@@ -60,13 +60,14 @@ def call_session_state():
     prediction = st.session_state['sp_input_df_prediction']
     raw_data = st.session_state['sp_input_df_rawdata']
     onetime = st.session_state['sp_input_df_onetimecost']
+    outlier = st.session_state['sp_input_df_outlier']
     predcol_cost = st.session_state['sp_input_predcol_cost']
     predcol_hierarchy = st.session_state['sp_input_predcol_hierarchy']
     predcol_datetime = st.session_state['sp_input_predcol_datetime']
     selection_currency = st.session_state['sp_input_selection_currency']
     color_base = st.session_state['sp_color_base']
 
-    return prediction, raw_data, onetime, predcol_cost, predcol_hierarchy, predcol_datetime, selection_currency, color_base
+    return prediction, raw_data, onetime, outlier, predcol_cost, predcol_hierarchy, predcol_datetime, selection_currency, color_base
 
 ### FOOTPRINTS PREDICTION CHECK
 def app_predcheck():

@@ -12,6 +12,7 @@ from app_style import *
 # - sp_input_df_rawdata               Raw Data Input, either upload or sample
 # - sp_input_df_prediction            Prediction Output after ML
 # - sp_input_df_onetimecost           One Time cost detected before ML
+# - sp_input_df_outlier               Prediction Output after ML not within the band
 # - sp_input_selection_granularity    What time granularity has been selected
 # - sp_input_selection_currency       What currency has been selected
 # - sp_input_predcol_cost             Prediction Column for Cost
@@ -534,6 +535,7 @@ if pred_status == True:
     st.markdown('---')
     prediction = input_ml_construct(norm_set)
     st.session_state['sp_input_df_prediction'] = prediction
+    st.session_state['sp_input_df_outlier'] = prediction[prediction['spance_pred_rating'] != 'Okay']
     st.session_state['sp_input_status_prediction'] = True
 # DISPLAY: FOOTER
 footer()

@@ -516,7 +516,7 @@ def fp_datastory_change():
 try:
     # Call session states into the script
     prediction, raw_data, onetime, outlier, predcol_cost, \
-    predcol_hierarchy, predcol_datetime, selection_currency, \
+    predcol_hierarchy, predcol_datetime, predcol_datetime_dt, selection_currency, \
     color_base = call_session_state()
     ### FP WELCOME
     datastory_welcome()

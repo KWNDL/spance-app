@@ -64,10 +64,11 @@ def call_session_state():
     predcol_cost = st.session_state['sp_input_predcol_cost']
     predcol_hierarchy = st.session_state['sp_input_predcol_hierarchy']
     predcol_datetime = st.session_state['sp_input_predcol_datetime']
+    predcol_datetime_dt = st.session_state['sp_input_predcol_datetime_dt']
     selection_currency = st.session_state['sp_input_selection_currency']
     color_base = st.session_state['sp_color_base']
 
-    return prediction, raw_data, onetime, outlier, predcol_cost, predcol_hierarchy, predcol_datetime, selection_currency, color_base
+    return prediction, raw_data, onetime, outlier, predcol_cost, predcol_hierarchy, predcol_datetime, predcol_datetime_dt, selection_currency, color_base
 
 ### FOOTPRINTS PREDICTION CHECK
 def app_predcheck():

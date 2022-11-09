@@ -16,7 +16,8 @@ from app_style import *
 # - sp_input_selection_granularity    What time granularity has been selected
 # - sp_input_selection_currency       What currency has been selected
 # - sp_input_predcol_cost             Prediction Column for Cost
-# - sp_input_predcol_datetime         Prediction Column for Datetime
+# - sp_input_predcol_datetime         Prediction Column for Datetime as string YYYY-MM-DD
+# - sp_input_predcol_datetime_dt      Prediction Column for Datetime as datetime
 # - sp_input_predcol_hierarchy        Prediction Column for Hierarchy
 # - sp_input_status_hierarchy         true if Hierarchy has been confirmed and created
 # - sp_input_status_prediction        true if Prediction has been run
@@ -182,9 +183,15 @@ def input_hierarchy(data):
             sel_datetime = st.selectbox('Datetime Column', options=datCols)
             st.session_state['sp_input_predcol_datetime'] = sel_datetime
         with right_col:
-            sel_granularity = st.selectbox('Time Granularity', ['Month', 'Week', 'Day'],
+            sel_granularity = st.selectbox('Time Granularity (working soon!)', ['Month', 'Day'],
                                            help='Currently inactive.')
             st.session_state['sp_input_selection_granularity'] = sel_granularity
+
+        ### DATETIME TO STRING
+        sel_datetime_dt = 'spance_' + sel_datetime + '_datetime'
+        cost_data[sel_datetime_dt] = cost_data[sel_datetime]
+        cost_data[sel_datetime] = cost_data[sel_datetime].dt.strftime('%Y-%m-%d')
+        st.session_state['sp_input_predcol_datetime_dt'] = sel_datetime_dt
 
         # Select Hierarchy columns
         st.markdown(
@@ -266,7 +273,7 @@ def input_hierarchy(data):
     if len(sel_hierarchy) != 0:
         submit_status = True
         hier_status = st.session_state['sp_input_status_hierarchy']
-        return submit_status, sel_costcol, sel_datetime, sel_hierarchy, sel_currency, hier_status
+        return submit_status, sel_costcol, sel_datetime, sel_datetime_dt, sel_hierarchy, sel_currency, hier_status
     else:
         footer()
         st.stop()
@@ -462,10 +469,6 @@ def input_ml_construct(norm_set):
     fp = fp.round(2)
     fp = fp.drop('index', axis=1)
 
-    fp[sel_datetime] = fp[sel_datetime].dt.strftime('%Y-%m-%d')
-    cost_onetime[sel_datetime] = cost_onetime[sel_datetime].dt.strftime('%Y-%m-%d')
-    cost_data[sel_datetime] = cost_data[sel_datetime].dt.strftime('%Y-%m-%d')
-
     ### CALCULATE KPIs
     prediction_amount = fp.sum()[sel_costcol]
     prediction_count = len(fp)
@@ -508,6 +511,9 @@ def input_ml_construct(norm_set):
     return fp
 
 
+def input_ml_forecast():
+    st.datadrame(prediction)
+
 # DISPLAY: WELCOME
 input_welcome()
 # DISPLAY: FILE UPLOAD
@@ -517,8 +523,8 @@ cost_data, file_uploaded = input_upload()
 # DISPLAY: SELECT HIERARCHY
 if file_uploaded == True:
     st.markdown('---')
-    submit_status, sel_costcol, sel_datetime, sel_hierarchy, sel_currency, hier_status = input_hierarchy(cost_data)
-    pred_col = [sel_datetime] + sel_hierarchy
+    submit_status, sel_costcol, sel_datetime, sel_datetime_dt, sel_hierarchy, sel_currency, hier_status = input_hierarchy(cost_data)
+    pred_col = [sel_datetime,sel_datetime_dt] + sel_hierarchy
 # DISPLAY: RUN ML TRANSFORMATION
 if hier_status == True:
     st.markdown('---')

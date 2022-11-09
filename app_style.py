@@ -42,7 +42,7 @@ def header(page_header):
     # Insert Logo
     a, b, c, = st.columns(3)
     with b:
-        st.image('images/sp_logo.png')
+        st.image('images/sp_logo_title.png')
     # Line
     st.markdown('---')
     st.title(page_header)
@@ -52,7 +52,7 @@ def footer():
     st.markdown('---')
     left, midleft, mid, midright, right = st.columns(5)
     with left:
-        st.image('images/sp_logo.png')
+        st.image('images/sp_logo_footer.png')
     st.caption(str(datetime.date.today().year) + ' | find us on spance.io')
 
 def call_session_state():

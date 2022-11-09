@@ -11,7 +11,7 @@ from app_style import *
 # Page Settings
 page_settings('Home - Spance')
 # Sidebar Logo
-sidebar_logo('images/sp_logo.png')
+sidebar_logo('images/sp_logo_header.png')
 # Page Header
 header('Home')
 

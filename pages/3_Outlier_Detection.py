@@ -9,7 +9,7 @@ from app_style import *
 # Page Settings
 page_settings('Outlier Detection - Spance')
 # Sidebar Logo
-sidebar_logo('images/sp_logo.png')
+sidebar_logo('images/sp_logo_header.png')
 # Page Header
 header('Outlier Detection')
 

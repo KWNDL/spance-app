@@ -7,7 +7,7 @@ from app_style import *
 page_settings('Outlook - Spance')
 
 # Sidebar Logo
-sidebar_logo('images/sp_logo.png')
+sidebar_logo('images/sp_logo_header.png')
 
 ### FOOTPRINTS PREVIEW TEXT
 def fp_preview_welcome():
